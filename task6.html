@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Enrollment Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .container {
+      max-width: 800px;
+      margin-top: 40px;
+    }
+    .form-section {
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Bootstrap 5 Card used as panel -->
+  <div class="card form-section">
+    <div class="card-header bg-primary text-white text-center">
+      <h4>Employee Enrollment Form</h4>
+    </div>
+    <div class="card-body">
+      <form id="employeeForm" novalidate>
+
+        <div class="row">
+          <!-- Full Name -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="empName" required>
+            <div class="invalid-feedback">Please enter full name.</div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="empEmail" required>
+            <div class="invalid-feedback">Please enter a valid email.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- DOB -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="empDOB" required>
+            <div class="invalid-feedback">Please select your birth date.</div>
+          </div>
+
+          <!-- Gender -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-select" id="empGender" required>
+              <option value="">-- Select --</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+            <div class="invalid-feedback">Please select your gender.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Designation -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Designation</label>
+            <input type="text" class="form-control" id="empDesignation" required>
+            <div class="invalid-feedback">Please enter designation.</div>
+          </div>
+
+          <!-- Department -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Department</label>
+            <input type="text" class="form-control" id="empDepartment" required>
+            <div class="invalid-feedback">Please enter department.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Phone -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="empPhone" required pattern="\d{10}" placeholder="10-digit number">
+            <div class="invalid-feedback">Please enter a 10-digit phone number.</div>
+          </div>
+
+          <!-- Marks -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Marks (%)</label>
+            <input type="number" class="form-control" id="empMarks" required min="0" max="100">
+            <div class="invalid-feedback">Please enter valid marks between 0–100.</div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" id="empAddress" rows="3" required></textarea>
+          <div class="invalid-feedback">Please enter your address.</div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-success w-100">Submit Application</button>
+      </form>
+
+      <!-- Success Alert -->
+      <div id="successAlert" class="alert alert-success mt-4 d-none" role="alert">
+        ✅ Application submitted successfully!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const form = document.getElementById('employeeForm');
+  const successAlert = document.getElementById('successAlert');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (form.checkValidity() && validatePhone() && validateMarks()) {
+      form.classList.remove('was-validated');
+      form.reset();
+      successAlert.classList.remove('d-none');
+    } else {
+      successAlert.classList.add('d-none');
+      form.classList.add('was-validated');
+    }
+  });
+
+  function validatePhone() {
+    const phone = document.getElementById('empPhone');
+    const valid = /^\d{10}$/.test(phone.value);
+    phone.classList.toggle('is-invalid', !valid);
+    return valid;
+  }
+
+  function validateMarks() {
+    const marks = document.getElementById('empMarks');
+    const val = parseFloat(marks.value);
+    const valid = val >= 0 && val <= 100;
+    marks.classList.toggle('is-invalid', !valid);
+    return valid;
+  }
+</script>
+
+</body>
+</html>

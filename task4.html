@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiplication Tables</title>
+</head>
+<body>
+  <h2>Generate Multiplication Tables</h2>
+
+  <label>Start Number: <input type="number" id="startNum"></label><br><br>
+  <label>End Number: <input type="number" id="endNum"></label><br><br>
+  <button onclick="generateTables()">Generate</button>
+
+  <div id="output"></div>
+
+  <script>
+    function generateTables() {
+      var start = parseInt(document.getElementById("startNum").value);
+      var end = parseInt(document.getElementById("endNum").value);
+      var outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = ""; // Clear previous output
+
+      var i = start;
+      while (i <= end) {
+        var j = 1;
+        var table = "<h3>Table of " + i + "</h3>";
+        while (j <= 10) {
+          table += i + " x " + j + " = " + (i * j) + "<br>";
+          j++;
+        }
+        outputDiv.innerHTML += table + "<hr>";
+        i++;
+      }
+    }
+  </script>
+</body>
+</html>

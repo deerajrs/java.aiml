@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Application Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Student Application Form</h2>
+  <form id="studentForm" onsubmit="return validateForm()">
+    
+    <label for="name">Full Name</label>
+    <input type="text" id="name">
+
+    <label for="email">Email</label>
+    <input type="email" id="email">
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob">
+
+    <label for="gender">Gender</label>
+    <select id="gender">
+      <option value="">--Select--</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+
+    <label for="course">Course Applied</label>
+    <input type="text" id="course">
+
+    <label for="address">Address</label>
+    <textarea id="address" rows="3"></textarea>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" placeholder="10-digit number">
+
+    <p id="errorMsg" class="error"></p>
+    <p id="successMsg" class="success"></p>
+
+    <button type="submit">Submit Application</button>
+  </form>
+</div>
+
+<script>
+  function validateForm() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const dob = document.getElementById("dob").value;
+    const gender = document.getElementById("gender").value;
+    const course = document.getElementById("course").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+
+    const errorMsg = document.getElementById("errorMsg");
+    const successMsg = document.getElementById("successMsg");
+
+    errorMsg.textContent = "";
+    successMsg.textContent = "";
+
+    if (!name || !email || !dob || !gender || !course || !address || !phone) {
+      errorMsg.textContent = "⚠️ All fields are required.";
+      return false;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errorMsg.textContent = "⚠️ Please enter a valid email address.";
+      return false;
+    }
+
+    // Phone number must be 10 digits
+    if (!/^\d{10}$/.test(phone)) {
+      errorMsg.textContent = "⚠️ Phone number must be 10 digits.";
+      return false;
+    }
+
+    successMsg.textContent = "✅ Application submitted successfully!";
+    return false; // Prevent actual submission for demo
+  }
+</script>
+
+</body>
+</html>

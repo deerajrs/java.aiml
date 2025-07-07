@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Letter Counter</title>
+</head>
+<body>
+  <h2>Count Letters in a Word</h2>
+
+  <input type="text" id="wordInput" placeholder="Enter a word" />
+  <button onclick="countLetters()">Count Letters</button>
+
+  <p id="result"></p>
+
+  <script>
+    function countLetters() {
+      // Get the input value
+      var word = document.getElementById("wordInput").value;
+
+      // Remove non-letter characters if needed (optional)
+      var lettersOnly = word.replace(/[^a-zA-Z]/g, '');
+
+      // Count letters
+      var letterCount = lettersOnly.length;
+
+      // Display result using DOM
+      document.getElementById("result").innerText = "Number of letters: " + letterCount;
+    }
+  </script>
+</body>
+</html>
